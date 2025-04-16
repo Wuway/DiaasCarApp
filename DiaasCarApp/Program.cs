@@ -7,6 +7,23 @@
         private static List<Car> cars = new List<Car>();
         static void Main(string[] args)
         {
+            Car ourCar = new Car("Honda", "Civic", 1998, "red", "AD86019", FuelType.Petrol, new DateTime(2021,12,04), GearType.Manual, 12);
+            ourCar.Trips.Add(new Trip (160, new DateTime(2024,03,15), new DateTime(636370000000000000), new DateTime(636380000000000000)));
+            ourCar.Trips.Add(new Trip (160, new DateTime(2024,04,16), new DateTime(636370000000000000), new DateTime(636380000000000000)));
+            Car anotherCar = new Car("Mazda", "Hobo", 1988, "brown", "SH!TMAN", FuelType.Hybrid, new DateTime(1988, 06, 24), GearType.Manual, 20);
+            cars.Add(ourCar);
+            cars.Add(anotherCar);
+
+
+            // Gemme Biler i en File
+            DataHandler dataHandler = new DataHandler("cars.txt");
+            // dataHandler.SaveCarsToFile(cars);
+            dataHandler.SaveCarsTripsToFile(cars);
+
+            Console.WriteLine("Saved cars to file!");
+
+            dataHandler.ReadCarsFromFile();
+
             // Vis menu
             while (true)
             {

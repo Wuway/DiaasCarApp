@@ -103,6 +103,10 @@ namespace DiaasCarApp
             $"Duration: {CalculateDuration()}";
 
         }
+        public override string ToString()
+        {
+            return $"{Distance},{TripDate},{StartTime},{EndTime}";
+        }
 
     }
 
@@ -134,6 +138,7 @@ namespace DiaasCarApp
 
     }
 
+  
 
     public class Engine
 
@@ -169,4 +174,5 @@ namespace DiaasCarApp
         }
 
     }
+
 }

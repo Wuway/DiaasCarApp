@@ -32,7 +32,7 @@ namespace DiaasCarApp
 
         private double _kmPerLiter;
 
-        private List<Trip> _trips;
+        public List<Trip> Trips { get; set; }
 
         private Engine _engine; //den viser sammenhæng mellem DCD og implementering
 
@@ -66,7 +66,7 @@ namespace DiaasCarApp
 
             _odometer = 0;
 
-            _trips = new List<Trip>();
+            Trips = new List<Trip>();
 
             _engine = new Engine(150); // Eksempel på hestekræfter
 
@@ -127,13 +127,15 @@ namespace DiaasCarApp
 
             {
 
-                //throw new InvalidOperationException("Engine is not running. Cannot drive."); StartEngine();
+                //throw new InvalidOperationException("Engine is not running. Cannot drive."); StartEngine(); STANDARD OUTCOMMENTED
 
             }
 
-            _trips.Add(trip);
+            Trips.Add(trip);
 
             _odometer += (int)trip.Distance;
+
+            //StopEngine(); ADDED BY ME = CRASHES PROGRAM
 
         }
 
@@ -155,8 +157,20 @@ namespace DiaasCarApp
 
         {
 
-            return new List<Trip>(_trips); // Returner en kopi for at undgå ekstern manipulation
+            return new List<Trip>(Trips); // Returner en kopi for at undgå ekstern manipulation
 
+        }
+
+        public override string ToString()
+        {
+            string result = $"Licenseplate: {_licensePlate}" + "\n";
+
+            foreach (Trip trip in Trips)
+            {
+                result += trip.ToString() + "\n"; // Tilføjer hver tur som en string under den bil som har kørt den
+            }
+
+            return result;
         }
     }
 }
