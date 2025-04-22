@@ -11,6 +11,18 @@ namespace DiaasCarApp
         public double _batteryCapacity; // i kWh
         public double kWHPerKm; // i kWh/km
         public double _currentCharge; // i kWh
+        public double tripConsumption;
+        public double distance;
+
+
+        public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double kWHPerKm) : base(brand, model, licensePlate)
+        {
+            _batteryCapacity = batteryCapacity;
+            this.kWHPerKm = kWHPerKm;
+            _currentCharge = 25; // Start med tom tank
+        }
+
+
         public void Charge(double amount)
         {
             if (amount > 0)
@@ -39,11 +51,30 @@ namespace DiaasCarApp
                 Console.WriteLine("Battery is empty. Cannot drive.");
             }
         }
-        public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double kWHPerKm) : base(brand, model, licensePlate)
+        public override bool CanDrive(double distance)
         {
-            _batteryCapacity = batteryCapacity;
-            this.kWHPerKm = kWHPerKm;
-            _currentCharge = 25; // Start med tom tank
+            if ((_currentCharge - CalculateConsumption(distance)) >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        public override void UpdateEnergyLevel(double distance)
+        {
+            _currentCharge = _currentCharge - tripConsumption;
+        }
+
+        public override double CalculateConsumption(double distance)
+        {
+            tripConsumption = distance / kWHPerKm;
+            return tripConsumption;
+        }
+
+
+
     }
 }

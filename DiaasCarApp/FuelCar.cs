@@ -12,6 +12,16 @@ namespace DiaasCarApp
         public double FuelTankCapacity; // i liter
         public double FuelConsumption; // i liter/km
         public double CurrentFuel; // i liter
+        public double tripConsumption;
+
+        public FuelCar(string brand, string model, string licensePlate, double fuelTankCapacity, double fuelConsumption) : base(brand, model, licensePlate)
+        {
+            this.FuelTankCapacity = fuelTankCapacity;
+            this.FuelConsumption = fuelConsumption;
+            this.CurrentFuel = 167; // Start med tom tank
+        }
+
+
         public void refuel(double amount)
         {
             if (amount > 0)
@@ -27,7 +37,7 @@ namespace DiaasCarApp
                 Console.WriteLine("Invalid refuel amount.");
             }
         }
-        public override void Drive(double distance)
+        /*public override void Drive(double distance)
         {
             double Tripdistance = distance / FuelConsumption;
 
@@ -41,13 +51,32 @@ namespace DiaasCarApp
             {
                 Console.WriteLine("Fuel tank is empty. Cannot drive.");
             }
-        }
-            public FuelCar(string brand, string model, string licensePlate, double fuelTankCapacity, double fuelConsumption) : base(brand, model, licensePlate)
+        }*/
+
+        public override bool CanDrive(double distance)
         {
-            this.FuelTankCapacity = fuelTankCapacity;
-            this.FuelConsumption = fuelConsumption;
-            this.CurrentFuel = 167; // Start med tom tank
+            if ((CurrentFuel - CalculateConsumption(distance)) >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        public override void UpdateEnergyLevel(double distance)
+        {
+            CurrentFuel = CurrentFuel - tripConsumption;
+        }
+
+        public override double CalculateConsumption(double distance)
+        {
+            tripConsumption = distance / FuelConsumption;
+            return tripConsumption;
+        }
+
+
     }
     }
 

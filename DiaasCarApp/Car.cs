@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
 namespace DiaasCarApp;
-public class Car
+public abstract class Car
 {
     public string Brand
     {
@@ -39,7 +39,10 @@ public class Car
     }
     public virtual void Drive(double distance)
     {
-
+        if (isEngineOn)
+        {
+            Console.WriteLine("Du kan godt køre.");
+        }
     }
     public void UpdateOdometer(double distance)
     {
@@ -59,4 +62,10 @@ public class Car
         Model = model;
         LicensePlate = licensePlate;
     }
+
+    public abstract bool CanDrive(double distance);
+
+    public abstract void UpdateEnergyLevel(double distance);
+
+    public abstract double CalculateConsumption(double distance);
 }
