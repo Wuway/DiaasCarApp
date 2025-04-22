@@ -1,162 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic.FileIO;
+﻿using System.Security.Cryptography.X509Certificates;
 
-namespace DiaasCarApp
+namespace DiaasCarApp;
+public class Car
 {
-    class Car
+    public string Brand
     {
-        // Egenskaber
+        get; set;
+    }
+    public string Model
+    {
+        get; set;
+    }
+    public int year
+    {
+        get; set;
+    }
+    public string LicensePlate
+    {
+        get; set;
+    }
+    public int Odometer
+    {
+        get; set;
+    }
+    public bool isEngineOn
+    {
+        get; set;
+    }
+    public void StartEngine()
+    {
+        isEngineOn = true;
+        Console.WriteLine("Engine started.");
+    }
+    public void StopEngine()
+    {
+        isEngineOn = false;
+        Console.WriteLine("Engine stopped.");
+    }
+    public virtual void Drive(double distance)
+    {
 
-        private string _brand;
-
-        private string _model;
-
-        private int _year;
-
-        private string _color;
-
-        private bool _isEngineOn;
-
-        private string _licensePlate;
-        private int _odometer;
-
-        private FuelType _fuelType;
-
-        private DateTime _firstRegistrationDate;
-
-        private GearType _gearType;
-
-        private double _kmPerLiter;
-
-        private List<Trip> _trips;
-
-        private Engine _engine; //den viser sammenhæng mellem DCD og implementering
-
-        private Wheel[] _wheels; //den viser sammenhæng mellem DCD og implementering
-
-        // Konstruktør
-
-        public Car(string brand, string model, int year, string color, string licensePlate, FuelType fuelType, DateTime firstRegistrationDate, GearType gearType, double kmPerLiter)
-
+    }
+    public void UpdateOdometer(double distance)
+    {
+        if (distance > 0)
         {
-
-            _brand = brand;
-
-            _model = model;
-
-            _year = year;
-
-            _color = color;
-
-            _licensePlate = licensePlate;
-
-            _fuelType = fuelType;
-
-            _firstRegistrationDate = firstRegistrationDate;
-
-            _gearType = gearType;
-
-            _kmPerLiter = kmPerLiter;
-
-            _isEngineOn = false;
-
-            _odometer = 0;
-
-            _trips = new List<Trip>();
-
-            _engine = new Engine(150); // Eksempel på hestekræfter
-
-            _wheels = new Wheel[4];
-
-            for (int i = 0; i < 4; i++)
-
-            {
-
-                _wheels[i] = new Wheel(18); // Eksempel på hjulstørrelse
-
-            }
-
+            Odometer += (int)distance;
+            Console.WriteLine($"Odometer updated to {Odometer} km.");
         }
-
-
-        // Metoder
-
-        public void StartEngine()
-
+        else
         {
-
-            if (_isEngineOn)
-
-            {
-
-                throw new InvalidOperationException("Engine is already running.");
-
-            }
-
-            _isEngineOn = true;
-
+            Console.WriteLine("Invalid distance.");
         }
-
-
-        public void StopEngine()
-
-        {
-
-            if (!_isEngineOn)
-
-            {
-
-                throw new InvalidOperationException("Engine is already stopped.");
-
-            }
-
-            _isEngineOn = false;
-
-        }
-
-
-        public void Drive(Trip trip)
-
-        {
-
-            if (!_isEngineOn)
-
-            {
-
-                //throw new InvalidOperationException("Engine is not running. Cannot drive."); StartEngine();
-
-            }
-
-            _trips.Add(trip);
-
-            _odometer += (int)trip.Distance;
-
-        }
-
-
-        public string GetCarDetails()
-
-        {
-
-            return $"Brand: {_brand}\nModel: {_model}\nYear: {_year}\nColor: {_color}\nLicense Plate: {_licensePlate}\n" +
-
-            $"Fuel Type: {_fuelType}\nFirst Registration Date: {_firstRegistrationDate.ToShortDateString()}\n" +
-
-            $"Gear Type: {_gearType}\nKm per Liter: {_kmPerLiter}\nOdometer: {_odometer} km";
-
-        }
-
-
-        public List<Trip> GetAllTrips()
-
-        {
-
-            return new List<Trip>(_trips); // Returner en kopi for at undgå ekstern manipulation
-
-        }
+    }
+        public Car(string brand, string model, string licensePlate)
+    {
+        Brand = brand;
+        Model = model;
+        LicensePlate = licensePlate;
     }
 }
