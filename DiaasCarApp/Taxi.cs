@@ -21,7 +21,7 @@ namespace DiaasCarApp
         void IEnergy.UseEnergy(double amount)
         { }
 
-        public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
+        public Taxi(IEnergy Car, string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
         {
             StartPrice = startPrice;
             PricePerKm = pricePerKm;

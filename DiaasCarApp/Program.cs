@@ -44,7 +44,16 @@ internal class Program
 
          Console.ReadKey(); */
 
-        Car car = new FuelCar("Toyota", "Corolla", "AB12345", 50, 20, 23, 140);
-        Taxi taxi = new Taxi("Mercedes", "E-Class", "TX11223", 49.0, 12.3, 7.5);
+        //        public FuelCar(string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
+
+        FuelCar car = new FuelCar("Mercedes", "E-Klasse", "AB99432", 50, 200);
+
+        //       public Taxi(IEnergy Car, string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
+
+        Taxi fuelTaxi = new Taxi(car, "Mercedes", "E-Klasse", "AB99432", 50, 200, 35, 2.5, 1.7);
+
+        ElectricCar eCar = new ElectricCar("Tesla", "Model S", "CD98890", 100, 5, 231);
+
+        Taxi electricTaxi = new Taxi(eCar, "Tesla", "Model S", "CD98890", 100, 5, 231, 35, 1.7);
     }
 }

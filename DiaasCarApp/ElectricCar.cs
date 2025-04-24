@@ -15,9 +15,8 @@ namespace DiaasCarApp
         public double distance;
         double IEnergy.EnergyLevel { get; }
         double IEnergy.MaxEnergy { get; }
-        public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double kWHPerKm, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
+        public ElectricCar(string brand, string model, string licensePlate, double kWHPerKm, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
         {
-            _batteryCapacity = batteryCapacity;
             this.kWHPerKm = kWHPerKm;
             EnergyLevel = _currentCharge;
             MaxEnergy = _batteryCapacity;

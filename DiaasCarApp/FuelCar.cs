@@ -15,10 +15,8 @@ namespace DiaasCarApp
         public double tripConsumption;
         double IEnergy.EnergyLevel { get; }
         double IEnergy.MaxEnergy { get; }
-        public FuelCar(string brand, string model, string licensePlate, double fuelTankCapacity, double fuelConsumption, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
+        public FuelCar(string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
         {
-            this.FuelTankCapacity = fuelTankCapacity;
-            this.FuelConsumption = fuelConsumption;
             EnergyLevel = CurrentFuel;
             MaxEnergy = FuelTankCapacity;
         }
