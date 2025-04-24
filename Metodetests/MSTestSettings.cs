@@ -23,27 +23,34 @@ Console.ReadLine(); */
 
 // Test taxi-funktionaliteten
 
+FuelCar fuelCar = new FuelCar("Mercedes", "E-Klasse", "AB99432", 234, 500);
+Taxi fuelTaxi = new Taxi(fuelCar, 60, 5.5, 3.5);
+
+ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD98890", 432, 3, 500);
+Taxi electricTaxi = new Taxi(electricCar, 60, 5.5, 3.5);
+
 void TestTaxi(Taxi fuelTaxi)
 
 {
 
-    taxi.StartEngine();
+    fuelTaxi.StartEngine();
 
-    taxi.StartMeter();
+    fuelTaxi.StartMeter();
 
-    taxi.Drive(10);
+    fuelTaxi.Drive(10);
 
-    double fare = taxi.CalculateFare(10, 15);
+    double fare = fuelTaxi.CalculateFare(10, 15);
 
-    taxi.StopMeter();
+    fuelTaxi.StopMeter();
 
-    taxi.StopEngine();
+    fuelTaxi.StopEngine();
 
     Console.WriteLine($"Taxi ride complete. Total fare: {fare:C2}");
 
-    Console.WriteLine($"Energy level: {taxi.EnergyLevel:F2}\n");
+    Console.WriteLine($"Energy level: {fuelTaxi.EnergyLevel:F2}\n");
 
 }
+
 
 // Test begge taxi-typer
 
@@ -54,4 +61,5 @@ TestTaxi(fuelTaxi);
 Console.WriteLine("Testing Electric Taxi:");
 
 TestTaxi(electricTaxi);
+Console.ReadLine();
 

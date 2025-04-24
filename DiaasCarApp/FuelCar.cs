@@ -13,15 +13,15 @@ namespace DiaasCarApp
         public double FuelConsumption; // i liter/km
         public double CurrentFuel; // i liter
         public double tripConsumption;
-        double IEnergy.EnergyLevel { get; }
-        double IEnergy.MaxEnergy { get; }
+        public double EnergyLevel { get; est}
+        public double MaxEnergy { get; }
         public FuelCar(string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
         {
             EnergyLevel = CurrentFuel;
             MaxEnergy = FuelTankCapacity;
         }
 
-        void IEnergy.Refill(double amount)
+        public void Refill(double amount)
         {
             if (amount > 0)
             {
@@ -36,27 +36,12 @@ namespace DiaasCarApp
                 Console.WriteLine("Invalid refuel amount.");
             }
         }
-        void IEnergy.UseEnergy(double distance)
+        public void UseEnergy(double distance)
         {
             CurrentFuel = CurrentFuel - tripConsumption;
             double Odometer =+ distance;
         }
 
-        public void refuel(double amount)
-        {
-            if (amount > 0)
-            {
-                CurrentFuel += amount;
-                if (CurrentFuel > FuelTankCapacity)
-                {
-                    CurrentFuel = FuelTankCapacity; // Maksimal kapacitet
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid refuel amount.");
-            }
-        }
         public override void Drive(double distance)
         {
             double Tripdistance = distance / FuelConsumption;
@@ -75,20 +60,12 @@ namespace DiaasCarApp
 
         public override bool CanDrive(double distance)
         {
-            if ((CurrentFuel - CalculateConsumption(distance)) >= 0)
+            return (CurrentFuel - CalculateConsumption(distance)) >= 0; // Check if the car can drive the given distance
+
+            /*if ((CurrentFuel - CalculateConsumption(distance)) >= 0)
             {
                 return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public override void UpdateEnergyLevel(double distance)
-        {
-            CurrentFuel = CurrentFuel - tripConsumption;
-            double Odometer =+ distance;
+            }*/
         }
 
         public override double CalculateConsumption(double distance)

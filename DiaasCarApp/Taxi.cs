@@ -9,20 +9,28 @@ namespace DiaasCarApp
 {
     public class Taxi : Car, IEnergy
     {
-        double StartPrice {get; set; }
-        double PricePerKm {get; set; }
-        double PricePerMinute {get; set; }
-        bool MeterStarted {get; set; }
-        double IEnergy.EnergyLevel { get; }
-        double IEnergy.MaxEnergy { get; }
+        public IEnergy car { get; set; }
+        double StartPrice { get; set; }
+        double PricePerKm { get; set; }
+        double PricePerMinute { get; set; }
+        bool MeterStarted { get; set; }
+        public double EnergyLevel { get; set; }
+        public double MaxEnergy { get; set; }
 
-        void IEnergy.Refill(double amount)
-        { }
-        void IEnergy.UseEnergy(double amount)
-        { }
-
-        public Taxi(IEnergy Car, string brand, string model, string licensePlate, double EnergyLevel, double MaxEnergy, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
+        public void Refill(double amount)
         {
+            car.Refill(amount);
+        }
+        public void UseEnergy(double amount)
+        {
+            car.UseEnergy(amount);
+        }
+
+        public Taxi(/*double EnergyLevel, double MaxEnergy, */ IEnergy energy, double startPrice, double pricePerKm, double pricePerMinute) : base((energy as Car).Brand, (energy as Car).Model, (energy as Car).LicensePlate)
+        {
+
+            /*EnergyLevel = Car.EnergyLevel;
+            MaxEnergy = Car.MaxEnergy;*/
             StartPrice = startPrice;
             PricePerKm = pricePerKm;
             PricePerMinute = pricePerMinute;
@@ -56,9 +64,9 @@ namespace DiaasCarApp
             return true;
         }
 
-        public override void UpdateEnergyLevel(double distance)
+       /* public override void UpdateEnergyLevel(double distance)
         {
-        }
+        } */
 
         public override double CalculateConsumption(double distance)
         {

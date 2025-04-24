@@ -13,8 +13,8 @@ namespace DiaasCarApp
         public double _currentCharge; // i kWh
         public double tripConsumption;
         public double distance;
-        double IEnergy.EnergyLevel { get; }
-        double IEnergy.MaxEnergy { get; }
+        public double EnergyLevel { get; set; }
+        public double MaxEnergy { get; set; }
         public ElectricCar(string brand, string model, string licensePlate, double kWHPerKm, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
         {
             this.kWHPerKm = kWHPerKm;
@@ -22,7 +22,7 @@ namespace DiaasCarApp
             MaxEnergy = _batteryCapacity;
         }
 
-        void IEnergy.Refill(double amount)
+        public void Refill(double amount)
         {
             if (amount > 0)
             {
@@ -38,7 +38,7 @@ namespace DiaasCarApp
             }
         }
 
-        void IEnergy.UseEnergy(double amount)
+        public void UseEnergy(double amount)
             {
                 _currentCharge = _currentCharge - tripConsumption;
             }
@@ -83,10 +83,10 @@ namespace DiaasCarApp
             }
         }
 
-        public override void UpdateEnergyLevel(double distance)
+   /*     public override void UpdateEnergyLevel(double distance)
         {
             _currentCharge = _currentCharge - tripConsumption;
-        }
+        } */
 
         public override double CalculateConsumption(double distance)
         {

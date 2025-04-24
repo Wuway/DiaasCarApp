@@ -66,7 +66,5 @@ public abstract class Car
 
     public abstract bool CanDrive(double distance);
 
-    public abstract void UpdateEnergyLevel(double distance);
-
     public abstract double CalculateConsumption(double distance);
 }
