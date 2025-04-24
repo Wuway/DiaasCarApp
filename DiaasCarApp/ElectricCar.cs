@@ -13,6 +13,7 @@ namespace DiaasCarApp
         public double _currentCharge; // i kWh
         public double tripConsumption;
         public double distance;
+        
 
 
         public ElectricCar(string brand, string model, string licensePlate, double batteryCapacity, double kWHPerKm) : base(brand, model, licensePlate)
@@ -70,7 +71,7 @@ namespace DiaasCarApp
 
         public override double CalculateConsumption(double distance)
         {
-            tripConsumption = distance / kWHPerKm;
+            tripConsumption = distance * kWHPerKm;
             return tripConsumption;
         }
 

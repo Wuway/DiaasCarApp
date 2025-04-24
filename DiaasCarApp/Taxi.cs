@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,21 +13,30 @@ namespace DiaasCarApp
         double PricePerKm {get; set; }
         double PricePerMinute {get; set; }
         bool MeterStarted {get; set; }
-        
+
+        public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
+        {
+            StartPrice = startPrice;
+            PricePerKm = pricePerKm;
+            PricePerMinute = pricePerMinute;
+        }
+
         public void StartMeter()
         {
+            MeterStarted = true;
         }
 
         public void StopMeter()
         {
+            MeterStarted = false;
         }
 
         public double CalculateFare(double distance, double minutes)
         {
-            return = 0;
+            return (distance * PricePerKm) + (minutes * PricePerMinute);
         }
 
-        public override bool CanDrive()
+        public override bool CanDrive(double distance)
         {
             return true;
         }
@@ -37,7 +47,7 @@ namespace DiaasCarApp
 
         public override double CalculateConsumption(double distance)
         {
-            return ;
+            return 0;
         }
 
     }

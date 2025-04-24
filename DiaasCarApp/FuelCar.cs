@@ -37,7 +37,7 @@ namespace DiaasCarApp
                 Console.WriteLine("Invalid refuel amount.");
             }
         }
-        /*public override void Drive(double distance)
+        public override void Drive(double distance)
         {
             double Tripdistance = distance / FuelConsumption;
 
@@ -51,7 +51,7 @@ namespace DiaasCarApp
             {
                 Console.WriteLine("Fuel tank is empty. Cannot drive.");
             }
-        }*/
+        }
 
         public override bool CanDrive(double distance)
         {
@@ -68,6 +68,7 @@ namespace DiaasCarApp
         public override void UpdateEnergyLevel(double distance)
         {
             CurrentFuel = CurrentFuel - tripConsumption;
+            double Odometer =+ distance;
         }
 
         public override double CalculateConsumption(double distance)
