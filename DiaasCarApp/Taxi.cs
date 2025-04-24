@@ -7,18 +7,33 @@ using System.Threading.Tasks;
 
 namespace DiaasCarApp
 {
-    public class Taxi : Car
+    public class Taxi : Car, IEnergy
     {
         double StartPrice {get; set; }
         double PricePerKm {get; set; }
         double PricePerMinute {get; set; }
         bool MeterStarted {get; set; }
+        double IEnergy.EnergyLevel { get; }
+        double IEnergy.MaxEnergy { get; }
+
+        void IEnergy.Refill(double amount)
+        { }
+        void IEnergy.UseEnergy(double amount)
+        { }
 
         public Taxi(string brand, string model, string licensePlate, double startPrice, double pricePerKm, double pricePerMinute) : base(brand, model, licensePlate)
         {
             StartPrice = startPrice;
             PricePerKm = pricePerKm;
             PricePerMinute = pricePerMinute;
+        }
+
+        public override void Drive(double distance)
+        {
+            if (isEngineOn)
+            {
+                Console.WriteLine("Du kan godt køre.");
+            }
         }
 
         public void StartMeter()

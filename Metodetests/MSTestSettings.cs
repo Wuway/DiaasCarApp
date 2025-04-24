@@ -1,7 +1,7 @@
 ﻿using DiaasCarApp;
 [assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]// Test FuelCar (Brand, Model, Licenseplate, TankCapacity, KmPerLiter)
 
-FuelCar fuelCar = new FuelCar("Toyota", "Corolla", "AB12345", 50, 20);
+FuelCar fuelCar = new FuelCar("Toyota", "Corolla", "AB12345", 50, 20, 23, 140);
 
 fuelCar.StartEngine();
 
@@ -11,7 +11,7 @@ Console.WriteLine($"FuelCar Odometer: {fuelCar.Odometer}, Fuel left: {fuelCar.Cu
 
 // Test ElectricCar
 
-ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD67890", 100, 5);
+ElectricCar electricCar = new ElectricCar("Tesla", "Model S", "CD67890", 100, 5, 23, 140);
 
 electricCar.StartEngine();
 

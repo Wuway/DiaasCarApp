@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
 namespace DiaasCarApp;
+
 public abstract class Car
 {
     public string Brand

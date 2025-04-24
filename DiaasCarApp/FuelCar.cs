@@ -7,20 +7,42 @@ using System.Threading.Tasks;
 
 namespace DiaasCarApp
 {
-    public class FuelCar : Car 
+    public class FuelCar : Car, IEnergy
     {
         public double FuelTankCapacity; // i liter
         public double FuelConsumption; // i liter/km
         public double CurrentFuel; // i liter
         public double tripConsumption;
-
-        public FuelCar(string brand, string model, string licensePlate, double fuelTankCapacity, double fuelConsumption) : base(brand, model, licensePlate)
+        double IEnergy.EnergyLevel { get; }
+        double IEnergy.MaxEnergy { get; }
+        public FuelCar(string brand, string model, string licensePlate, double fuelTankCapacity, double fuelConsumption, double EnergyLevel, double MaxEnergy) : base(brand, model, licensePlate)
         {
             this.FuelTankCapacity = fuelTankCapacity;
             this.FuelConsumption = fuelConsumption;
-            this.CurrentFuel = 167; // Start med tom tank
+            EnergyLevel = CurrentFuel;
+            MaxEnergy = FuelTankCapacity;
         }
 
+        void IEnergy.Refill(double amount)
+        {
+            if (amount > 0)
+            {
+                CurrentFuel += amount;
+                if (CurrentFuel > FuelTankCapacity)
+                {
+                    CurrentFuel = FuelTankCapacity; // Maksimal kapacitet
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid refuel amount.");
+            }
+        }
+        void IEnergy.UseEnergy(double distance)
+        {
+            CurrentFuel = CurrentFuel - tripConsumption;
+            double Odometer =+ distance;
+        }
 
         public void refuel(double amount)
         {
@@ -76,8 +98,6 @@ namespace DiaasCarApp
             tripConsumption = distance / FuelConsumption;
             return tripConsumption;
         }
-
-
     }
     }
 
